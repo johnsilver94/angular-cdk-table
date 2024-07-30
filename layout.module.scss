@@ -1,0 +1,8 @@
+.main {
+	margin-left: auto;
+	width: calc(100% - ($sidebar-width + $sidebar-strip-width));
+
+	&.collapsed {
+		width: calc(100% - ($sidebar-collapsed-width + $sidebar-strip-width));
+	}
+}
