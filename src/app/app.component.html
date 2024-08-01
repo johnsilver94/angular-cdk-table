@@ -32,11 +32,7 @@
 	</ng-container>
 
 	<ng-container cdkColumnDef="nodata">
-		<cdk-footer-cell
-			*cdkFooterCellDef
-			[attr.colspan]="columnsToDisplay.length"
-			style="justify-content: center;"
-		>
+		<cdk-footer-cell *cdkFooterCellDef [attr.colspan]="columnsToDisplay.length">
 			No Data Available
 		</cdk-footer-cell>
 	</ng-container>
@@ -67,7 +63,6 @@
 		type="text"
 		placeholder="Search by email"
 	>
-	<!-- <input formControlName="website" type="text"  placeholder="Search by website domain"> -->
 	<select title="website" formControlName="website">
 		@for (domain of domains; track $index) {
 		<option [value]="domain">{{domain}}</option>

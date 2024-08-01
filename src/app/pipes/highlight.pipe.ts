@@ -13,15 +13,15 @@ export class HighlightSearch implements PipeTransform {
 			return value
 		}
 		// Match in a case insensitive maneer
-		const re = new RegExp(args, "gi")
-		const match = value.match(re)
+		const regex = new RegExp(args, "gi")
+		const match = value.match(regex)
 
 		// If there's no match, just return the original value.
 		if (!match) {
 			return value
 		}
 
-		const replacedValue = value.replace(re, (match) => `<mark>${match}</mark>`)
+		const replacedValue = value.replace(regex, (match) => `<mark>${match}</mark>`)
 		return this.sanitizer.bypassSecurityTrustHtml(replacedValue)
 	}
 }

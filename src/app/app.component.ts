@@ -1,15 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Component, OnInit, ViewChild } from "@angular/core"
 import { RouterOutlet } from "@angular/router"
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { CdkTableModule } from "@angular/cdk/table"
 import { MatSort, MatSortable, MatSortModule } from "@angular/material/sort"
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { MatTableDataSource } from "@angular/material/table"
 import { User } from "./models/user.model"
 import { debounceTime, distinctUntilChanged, Subject, tap } from "rxjs"
 import { UsersService } from "./services/users.service"
-import { CommonModule } from "@angular/common"
-import { BrowserModule } from "@angular/platform-browser"
 import { ROW_ANIMATION } from "./animations/row.animation"
 import { UserQuery } from "./query/users.query"
 import { HighlightSearch } from "./pipes/highlight.pipe"
@@ -47,9 +45,9 @@ export class AppComponent implements OnInit {
 
 	nameQueryChanged: Subject<string> = new Subject<string>()
 	@ViewChild("pagination", { static: true })
-	// @ts-ignore
+	// @ts-expect-error
 	paginator: PaginatorComponent
-	// @ts-ignore
+	// @ts-expect-error
 	@ViewChild(MatSort, { static: true }) sort: MatSort
 	pageSize = 10
 
@@ -72,6 +70,7 @@ export class AppComponent implements OnInit {
 		this.users.paginator = this.paginator
 		this.users.sort = this.sort
 		this.users.filter = this.userQuery.filter(this.initialFilter)
+		this.queryForm.get("website")?.setValue(this.initialFilter.website)
 
 		// connect data to table
 		this.usersService
@@ -79,9 +78,7 @@ export class AppComponent implements OnInit {
 			.pipe(
 				tap((users) => {
 					const domains = users.map((user) => user.website.split(".").slice(-1)[0])
-					console.log("domains", domains)
 					this.domains = [...new Set<string>(domains)]
-					console.log("this.domains", this.domains)
 				})
 			)
 			.subscribe((users) => (this.users.data = users))

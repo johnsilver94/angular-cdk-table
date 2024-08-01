@@ -135,6 +135,7 @@ cdk-header-cell {
 
 table.cdk-table {
 	border-spacing: 0;
+	width: 1280px;
 
 	td[rowspan] {
 		vertical-align: middle;
@@ -250,5 +251,5 @@ cdk-header-cell {
 .cdk-column-id,
 .cdk-column-email,
 .cdk-column-fullName {
-	justify-content: flex-end;
+	// justify-content: flex-end;
 }

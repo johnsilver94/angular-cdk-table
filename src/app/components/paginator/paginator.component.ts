@@ -1,14 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	Inject,
-	OnChanges,
-	OnInit,
-	Optional,
-	SimpleChanges,
-	ViewEncapsulation
-} from "@angular/core"
+import { ChangeDetectorRef, Component, Inject, OnChanges, OnInit, Optional, SimpleChanges } from "@angular/core"
 import {
 	MatPaginator,
 	MatPaginatorDefaultOptions,
