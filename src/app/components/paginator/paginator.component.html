@@ -1,59 +1,55 @@
-<!-- eslint-disable @html-eslint/require-li-container -->
 <ul class="pagination">
 	<li
-		class="link"
+		class="link prev-page"
 		[ngClass]="{ 'disabled': pageIndex === 0 }"
 		*ngIf="getNumberOfPages() > 1"
+		(click)="pageIndex > 0 && previousPage()"
 	>
-		<a (click)="pageIndex > 0 && previousPage()" class="page-link prev-page">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="8"
-				height="12"
-				viewBox="0 0 8 12"
-			>
-				<g fill="none" fill-rule="evenodd">
-					<path
-						fill="#33313C"
-						d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z"
-						class="nav-arrows"
-					></path>
-				</g>
-			</svg>
-		</a>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="8"
+			height="12"
+			viewBox="0 0 8 12"
+		>
+			<g fill="none" fill-rule="evenodd">
+				<path fill="#33313C" d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z"></path>
+			</g>
+		</svg>
 	</li>
 
-	<ng-container *ngFor="let pageNum of fetchPageNumbers() || [] | fetchPages">
+	@for (pageNum of fetchPageNumbers() || [] | fetchPages; track $index) {
+	<li class="link ellipsis" *ngIf="pageNum.page === false && pageNum.value === LEFT_PAGE">
+		...
+	</li>
+	<li
+		class="link"
+		[ngClass]="{'active': +pageNum.value -1  === pageIndex }"
+		*ngIf="pageNum.page === true"
+		(click)="setPage(+pageNum.value -1)"
+	>
+		{{pageNum.value }}
+	</li>
 
-		<li class="link" *ngIf="pageNum.page === false && pageNum.value === LEFT_PAGE">
-			<a class="page-link ellipsis">...</a>
-		</li>
-		<li [ngClass]="{'active': pageNum.value -1  === pageIndex }" *ngIf="pageNum.page === true">
-			<a (click)="setPage(pageNum.value -1 )" class="page-link">{{pageNum.value }}</a>
-		</li>
+	<li class="link ellipsis" *ngIf="pageNum.page === false && pageNum.value === RIGHT_PAGE">
+		...
+	</li>
+	}
 
-		<li class="link" *ngIf="pageNum.page === false && pageNum.value === RIGHT_PAGE">
-			<a class="page-link ellipsis">...</a>
-		</li>
-	</ng-container>
-
-	<li class="link" *ngIf="hasNextPage()">
-		<a (click)="nextPage()" class="page-link next-page">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="8"
-				height="12"
-				viewBox="0 0 8 12"
-			>
-				<g fill="none" fill-rule="evenodd">
-					<path
-						fill="#33313C"
-						d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z"
-						class="nav-arrows"
-					></path>
-				</g>
-			</svg>
-		</a>
+	<li
+		class="link next-page"
+		*ngIf="hasNextPage()"
+		(click)="nextPage()"
+	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="8"
+			height="12"
+			viewBox="0 0 8 12"
+		>
+			<g fill="none" fill-rule="evenodd">
+				<path fill="#33313C" d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z"></path>
+			</g>
+		</svg>
 	</li>
 </ul>
 <div class="description">

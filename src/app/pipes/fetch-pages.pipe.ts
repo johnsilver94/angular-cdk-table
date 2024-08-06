@@ -1,14 +1,21 @@
 import { Pipe, PipeTransform } from "@angular/core"
 
+type PaginatorPage = {
+	page: boolean
+	value: number | string
+}
+
 @Pipe({
 	name: "fetchPages",
 	standalone: true
 })
 export class FetchPages implements PipeTransform {
-	transform(pages: any[]): any {
+	transform(pages: (number | string)[]): PaginatorPage[] {
+		console.log("🚀 ~ FetchPages ~ transform ~ pages:", pages)
+
 		if (pages) {
-			return pages.reduce((acc, page) => {
-				if (!isNaN(page)) {
+			return pages.reduce((acc: PaginatorPage[], page) => {
+				if (typeof page === "number") {
 					acc.push({
 						page: true,
 						value: page
@@ -22,5 +29,7 @@ export class FetchPages implements PipeTransform {
 				return acc
 			}, [])
 		}
+
+		return pages
 	}
 }

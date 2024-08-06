@@ -66,7 +66,6 @@ cdk-footer-row {
 
 cdk-header-row:not(:last-of-type),
 tr.cdk-header-row:not(:last-of-type) {
-
 	cdk-header-cell,
 	th.cdk-header-cell {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -215,7 +214,8 @@ cdk-header-cell {
 		&::after {
 			--after-el-height: 40%;
 			background: rgba(0, 0, 0, 0.3);
-			box-shadow: inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
+			box-shadow:
+				inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
 				inset 0px -4px 0px 0px rgba(255, 255, 255, 0.5);
 			content: "";
 			height: var(--after-el-height);
@@ -232,7 +232,8 @@ cdk-header-cell {
 		&::before {
 			--after-el-height: 40%;
 			background: rgba(0, 0, 0, 0.3);
-			box-shadow: inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
+			box-shadow:
+				inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
 				inset 0px -4px 0px 0px rgba(255, 255, 255, 0.5);
 			content: "";
 			height: var(--after-el-height);
