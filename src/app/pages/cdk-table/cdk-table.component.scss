@@ -22,10 +22,6 @@ $cdk-row-horizontal-padding: 24px;
  * Flex-based table structure
  */
 
-cdk-table {
-	display: block;
-}
-
 cdk-header-row {
 	min-height: $cdk-header-row-height;
 
@@ -46,22 +42,10 @@ cdk-row,
 cdk-header-row,
 cdk-footer-row {
 	align-items: center;
-	// border-bottom-width: 1px;
 	border-style: solid;
-	// Define a border style, but then widths default to 3px. Reset them to 0px except the bottom
-	// which should be 1px;
 	border-width: 0;
 	box-sizing: border-box;
 	display: flex;
-
-	// Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
-	// element that will stretch the row the correct height. See:
-	// https://connect.microsoft.com/IE/feedback/details/802625
-	&::after {
-		content: "";
-		display: inline-block;
-		min-height: inherit;
-	}
 }
 
 cdk-header-row:not(:last-of-type),
@@ -77,36 +61,6 @@ tr.cdk-header-row:not(.sticky):last-of-type {
 	border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }
 
-// Note: we use `first-of-type`/`last-of-type` here in order to prevent extra
-// elements like ripples or badges from throwing off the layout (see #11165).
-cdk-cell:first-of-type,
-cdk-header-cell:first-of-type,
-cdk-footer-cell:first-of-type,
-td.cdk-cell:first-of-type,
-td.cdk-header-cell:first-of-type,
-td.cdk-footer-cell:first-of-type {
-	padding-left: $cdk-row-horizontal-padding;
-
-	[dir="rtl"] & {
-		padding-left: 0;
-		padding-right: $cdk-row-horizontal-padding;
-	}
-}
-
-cdk-cell:last-of-type,
-cdk-header-cell:last-of-type,
-cdk-footer-cell:last-of-type,
-td.cdk-cell:last-of-type,
-td.cdk-header-cell:last-of-type,
-td.cdk-footer-cell:last-of-type {
-	padding-right: $cdk-row-horizontal-padding;
-
-	[dir="rtl"] & {
-		padding-left: $cdk-row-horizontal-padding;
-		padding-right: 0;
-	}
-}
-
 cdk-cell,
 cdk-header-cell,
 cdk-footer-cell {
@@ -115,12 +69,10 @@ cdk-footer-cell {
 	flex: 1;
 	min-height: inherit;
 	padding: 0 1rem;
-	// overflow   : hidden;
 	word-wrap: break-word;
 }
 
-cdk-footer-cell,
-td.cdk-footer-cell {
+cdk-footer-cell {
 	border-top: 1px #dadada solid;
 }
 
@@ -134,7 +86,7 @@ cdk-header-cell {
 
 table.cdk-table {
 	border-spacing: 0;
-	width: 1280px;
+	width: 100%;
 
 	td[rowspan] {
 		vertical-align: middle;
@@ -146,111 +98,11 @@ table.cdk-table {
 		min-height: inherit;
 		overflow: hidden;
 		padding: 0 0.5rem;
-		word-wrap: break-word;
-	}
-
-	td,
-	th {
 		vertical-align: middle;
+		word-wrap: break-word;
 	}
 
 	th {
 		@extend %header-cell;
 	}
-}
-
-tr.cdk-row,
-tr.cdk-footer-row {
-	height: $cdk-row-height;
-}
-
-tr.cdk-header-row {
-	height: $cdk-header-row-height;
-}
-
-// th.cdk-header-cell,
-// td.cdk-cell,
-// td.cdk-footer-cell {
-//     padding: 0;
-//     border-bottom-width: 1px;
-//     border-bottom-style: solid;
-// }
-// Note: we use `first-of-type`/`last-of-type` here in order to prevent extra
-// elements like ripples or badges from throwing off the layout (see #11165).
-th.cdk-header-cell:first-of-type,
-td.cdk-cell:first-of-type,
-td.cdk-footer-cell:first-of-type {
-	padding-left: $cdk-row-horizontal-padding;
-
-	[dir="rtl"] & {
-		padding-left: 0;
-		padding-right: $cdk-row-horizontal-padding;
-	}
-}
-
-th.cdk-header-cell:last-of-type,
-td.cdk-cell:last-of-type,
-td.cdk-footer-cell:last-of-type {
-	padding-right: $cdk-row-horizontal-padding;
-
-	[dir="rtl"] & {
-		padding-left: $cdk-row-horizontal-padding;
-		padding-right: 0;
-	}
-}
-
-/**
-TABLE HELPERS
-**/
-th,
-cdk-header-cell {
-	&.hide-border-bottom {
-		border-bottom: none;
-	}
-
-	&.show-right-border {
-		position: relative;
-
-		&::after {
-			--after-el-height: 40%;
-			background: rgba(0, 0, 0, 0.3);
-			box-shadow:
-				inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
-				inset 0px -4px 0px 0px rgba(255, 255, 255, 0.5);
-			content: "";
-			height: var(--after-el-height);
-			position: absolute;
-			right: 0;
-			top: calc(50% - calc(var(--after-el-height) / 2));
-			width: 1px;
-		}
-	}
-
-	&.show-left-border {
-		position: relative;
-
-		&::before {
-			--after-el-height: 40%;
-			background: rgba(0, 0, 0, 0.3);
-			box-shadow:
-				inset 0px 4px 0px 0px rgba(255, 255, 255, 0.5),
-				inset 0px -4px 0px 0px rgba(255, 255, 255, 0.5);
-			content: "";
-			height: var(--after-el-height);
-			left: 0;
-			position: absolute;
-			top: calc(50% - calc(var(--after-el-height) / 2));
-			width: 1px;
-		}
-	}
-}
-
-.mat-sort-header-button {
-	text-transform: inherit;
-}
-
-.cdk-column-id,
-.cdk-column-email,
-.cdk-column-fullName {
-	// justify-content: flex-end;
 }

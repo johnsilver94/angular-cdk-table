@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 
 @Component({
-	selector: "app-paginator",
+	selector: "table-paginator",
 	templateUrl: "./paginator.component.html",
 	styleUrls: ["./paginator.component.scss"],
 	imports: [CommonModule, FormsModule, FetchPages],
